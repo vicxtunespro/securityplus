@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
@@ -9,14 +9,6 @@ export default function LoginPage() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [status, setStatus] = useState('Sign up');
-
-    useEffect(()=>{
-        const token = document.cookie.includes('token');
-        
-        if(token){
-            router.push('/dashboard');
-        }
-    })
     
 
     const handleSubmission = async (e) => {
