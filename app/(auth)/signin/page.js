@@ -15,6 +15,10 @@ export default function LoginPage() {
         e.preventDefault();
         setStatus("Loading..."); // Indicate loading state
 
+        //Clear any message alert
+        setError("");
+        setSuccess("");
+
         try {
             const res = await fetch('/api/auth/login', {
                 method: 'POST',

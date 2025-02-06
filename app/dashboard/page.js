@@ -8,9 +8,9 @@ export default function Dashboard() {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-bold">Dashboard</h1>
           <div>
-            <button className="bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
+            <a href="/api/auth/logout" className="bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
               Logout
-            </button>
+            </a>
           </div>
         </div>
       </nav>
