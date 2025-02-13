@@ -10,7 +10,7 @@ import Dashboard from '@/components/ui/dashboard'
 
 export default function HomePage() {
   return (
-    <div className='h-screen'>
+    <div className='h-screen overflow-y-hidden'>
       <Dashboard/>
     </div>
   )

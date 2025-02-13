@@ -3,7 +3,7 @@ import MessageCard from './message-card'
 
 export default function RecentMessages() {
   return (
-    <div className='flex flex-col gap-4 w-1/2 '>
+    <div className='flex flex-col gap-4 w-1/2'>
         <h1 className='font-semibold '>Recent Messages</h1>
         <div className="">
             <MessageCard
