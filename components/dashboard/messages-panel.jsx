@@ -1,10 +1,11 @@
 import React from 'react'
 import MessageCard from './message-card'
+import { CardHeader } from './header'
 
 export default function RecentMessages() {
   return (
-    <div className='flex flex-col gap-4 w-1/2'>
-        <h1 className='font-semibold '>Recent Messages</h1>
+    <div className='flex flex-col gap-4 col-span-12 md:col-span-6 lg:col-span-4 bg-white p-8'>
+        <CardHeader title={"Recent Messages"}/>
         <div className="">
             <MessageCard
                 user="John Doe"

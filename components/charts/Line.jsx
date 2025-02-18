@@ -1,5 +1,6 @@
 'use client'
 import { Line } from "react-chartjs-2";
+import { CardHeader, Header } from '@/components/dashboard/header'
 import { 
     Chart as ChartJS, LinearScale,
     CategoryScale,
@@ -27,11 +28,15 @@ export function LineGraph(){
             title: {
                 display: true,
                 text: "Client's Growth"
+            },
+            legend: {
+                display: false
             }
         }
     }
     return(
-        <div className="w-1/2 h-full bg-white rounded-lg grid place-items-center">
+        <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg p-8">
+            <CardHeader title={"Gender Composition"}/>
             <Line options={Options} data={SecurityCompanyData}/>
         </div>
     )

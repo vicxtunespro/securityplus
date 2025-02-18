@@ -25,8 +25,8 @@ export default function SideBar(){
     return(
     <div className={
         clsx(
-            "fixed z-20 md:relative h-screen bg-sky-800 text-white p-4 flex flex-col gap-8 relative",
-            min ? " w-16 transition-all ease-in-out " : "w-[280px] max-w-[280px]"
+            "hidden md:relative h-screen bg-sky-800 text-white p-4 md:flex flex-col gap-8",
+            min ? " w-16 transition-all ease-in-out " : "w-[300px] min-w-[230px]"
         )
     }
     >
@@ -48,10 +48,10 @@ export default function SideBar(){
         </div>
         <SearchBar min={min}/>
         <div className="flex flex-col gap-2">
-            <NavItem icon={Home} label="Dashboard" min={min} Maximise={maximise} />
-            <NavItem icon={Users} label="Client Management" min={min} Maximise={maximise} />
-            <NavItem icon={Shield} label="Officer Management" min={min} Maximise={maximise} />
-            <NavItem icon={FileText} label="Reports & Analysis" min={min} Maximise={maximise} />
+            <NavItem icon={Home} label="Dashboard" min={min} Maximise={maximise} url={'/dashboard'}/>
+            <NavItem icon={Users} label="Client Management" min={min} Maximise={maximise} url={'/dashboard/clients'}/>
+            <NavItem icon={Shield} label="Officer Management" min={min} Maximise={maximise} url={'/dashboard/officers'}/>
+            <NavItem icon={FileText} label="Reports & Analysis" min={min} Maximise={maximise} url={'/dashboard/analysis'}/>
         </div>
         <div className="mt-40 flexx flex-col gap-2">
             <NavItem icon={Settings} label="Settings" min={min} Maximise={maximise} />
