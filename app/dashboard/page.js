@@ -8,12 +8,11 @@ import CardGroup from '@/components/ud/cardGroup'
 
 function Dashboard() {
   return (
-    <div className="flex flex-col gap-8 bg-red-200 overflow-y-scroll">
+    <div className="flex flex-col gap-8 ">
         <div className='flex flex-col'>
           <CardGroup/>
-          <div className='grid grid-cols-12 gap-4 mt-8'>
+          <div className='grid grid-cols-12 gap-2 md:gap-4 mt-8'>
             <RecentMessages/>
-            <LineGraph/>
             <LineGraph/>
           </div>
         </div>

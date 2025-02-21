@@ -4,7 +4,7 @@ import { CardHeader } from './header'
 
 export default function RecentMessages() {
   return (
-    <div className='flex flex-col gap-4 col-span-12 md:col-span-6 lg:col-span-4 bg-white p-8'>
+    <div className='flex flex-col gap-4 col-span-12 md:col-span-12 lg:col-span-4 bg-white p-8 rounded-lg'>
         <CardHeader title={"Recent Messages"}/>
         <div className="">
             <MessageCard

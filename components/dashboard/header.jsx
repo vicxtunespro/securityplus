@@ -4,7 +4,7 @@ import React from 'react'
 export function Header({title}) {
   return (
     <div className='flex flex-col gap-2'>
-        <span className='font-semibold text-xl text-white'>{title}</span>
+        <span className='font-semibold text-xl text-slate-900'>{title}</span>
         <span className='text-xs text-[#CCCCCC]'>Welcome back!</span>
     </div>
   )

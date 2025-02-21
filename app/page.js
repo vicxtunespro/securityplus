@@ -5,13 +5,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ChevronRight, MailIcon, Loader2, User } from "lucide-react"
 
 import React from 'react'
-import Dashboard from '@/components/ui/dashboard'
+import Link from 'next/link'
 
 
 export default function HomePage() {
   return (
-    <div className=''>
-      <Dashboard/>
+    <div className='overflow-hidden'>
+      <Link href={"/dashboard"}>Admins only</Link>
     </div>
   )
 }

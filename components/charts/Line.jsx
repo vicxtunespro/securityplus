@@ -35,7 +35,7 @@ export function LineGraph(){
         }
     }
     return(
-        <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg p-8">
+        <div className="col-span-12 md:col-span-12 lg:col-span-8 bg-white rounded-lg p-8">
             <CardHeader title={"Gender Composition"}/>
             <Line options={Options} data={SecurityCompanyData}/>
         </div>

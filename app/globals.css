@@ -6,13 +6,13 @@ html,
 body,
 :root{
   height: 100%;
-
+  box-sizing: border-box;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   /* overflow: hidden; */
-  background-color: #eaeaeb;
+  background-color: rgb(247, 249, 250);
 }
 
 @layer base {
@@ -78,4 +78,14 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Hide scrollbar but allow scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
