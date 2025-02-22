@@ -1,6 +1,5 @@
 import NavBar from '@/components/dashboard/navbar'
 import SideBar from '@/components/dashboard/navigation'
-import { NavProvider } from '@/context/navContext'
 import React from 'react'
 
 

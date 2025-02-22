@@ -1,4 +1,15 @@
+'use client'
+import useModalStore from "@/store/modalStore";
+import Modal from '@/components/Data Models/modal'
+import AddGuardForm from "../Data Models/addOfficer";
+
 export default function SectionHeader() {
+
+    const { openModal } = useModalStore();
+
+    const handleOpenModal = () => {
+        openModal(<AddGuardForm/>);
+      };
 
     const navigation = [
         {
@@ -28,7 +39,7 @@ export default function SectionHeader() {
             <div className="items-start justify-between md:flex">
                 <div>
                     <h3 className="text-gray-800 text-2xl font-bold">
-                        Payments
+                        Officers
                     </h3>
                 </div>
                 <div className="items-center gap-x-3 mt-6 md:mt-0 sm:flex">
@@ -41,12 +52,12 @@ export default function SectionHeader() {
                         </svg>
                         Filter
                     </a>
-                    <a
-                        href="javascript:void(0)"
-                        className="block px-4 py-2 mt-3 text-center text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 sm:mt-0 md:text-sm"
+                    <span
+                        onClick={handleOpenModal}
+                        className="cursor-pointer block px-4 py-2 mt-3 text-center text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 sm:mt-0 md:text-sm"
                     >
-                        Create payment
-                    </a>
+                        New Officer
+                    </span>
                 </div>
             </div>
             <div className="mt-6 md:mt-4">
@@ -65,6 +76,9 @@ export default function SectionHeader() {
                         ))
                     }
                 </ul>
+            </div>
+            <div>
+                <Modal/>
             </div>
         </div>
     )
