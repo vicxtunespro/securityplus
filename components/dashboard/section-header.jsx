@@ -1,14 +1,14 @@
 'use client'
 import useModalStore from "@/store/modalStore";
 import Modal from '@/components/Data Models/modal'
-import AddGuardForm from "../Data Models/addOfficer";
+import AddOfficerModal from "../Data Models/addOfficer";
 
 export default function SectionHeader() {
 
     const { openModal } = useModalStore();
 
     const handleOpenModal = () => {
-        openModal(<AddGuardForm/>);
+        openModal(<AddOfficerModal/>);
       };
 
     const navigation = [
