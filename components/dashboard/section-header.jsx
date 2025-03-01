@@ -2,6 +2,7 @@
 import useModalStore from "@/store/modalStore";
 import Modal from '@/components/Data Models/modal'
 import AddGuardForm from "../Data Models/addOfficer";
+import OfficerTable from '@/components/dashboard/officers/data-table'
 
 export default function SectionHeader() {
 
@@ -79,6 +80,7 @@ export default function SectionHeader() {
             </div>
             <div>
                 <Modal/>
+                <OfficerTable/>
             </div>
         </div>
     )
