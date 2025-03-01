@@ -3,8 +3,13 @@ import React, { useState } from 'react';
 import { addOfficer } from '@/lib/database';
 import InputField from './input-field';
 import { InfoIcon } from 'lucide-react';
+import useModalStore from '@/store/modalStore';
+
+
 
 const AddOfficerModal = () => {
+  const {closeModal} = useModalStore()
+
   const [officerInfo, setOfficerInfo] = useState({
     first_name: '',
     last_name: '',
@@ -33,6 +38,8 @@ const AddOfficerModal = () => {
     try {
       await addOfficer(officerInfo);
       alert('Guard added successfully!');
+      closeModal()
+      window.location.reload();
       setOfficerInfo({
         first_name: '',
         last_name: '',
@@ -49,13 +56,14 @@ const AddOfficerModal = () => {
     }
   };
 
+ 
   return (
     <form className="h-full" onSubmit={handleSubmit}>
       <div className="modal-header-section flex flex-col gap-2">
-        <h1 className="text-sm md:text-xl lg:text-2xl md:font-bold">
+        <h1 className="md:text-xl lg:text-2xl font-bold md:font-bold">
           Registration Form - Security Personnel
         </h1>
-        <p className="text-xs font-light text-slate-400">
+        <p className="text-xs font-light text-slate-500">
           All Security guards information must be collected accurately for complete registration.
         </p>
       </div>
@@ -161,18 +169,18 @@ const AddOfficerModal = () => {
           </div>
         </div>
 
-        <div className="w-full flex items-center justify-between bg-slate-200 py-12 px-8 mt-8">
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2 text-lg items-center font-medium">
+        <div className="w-full flex flex-col gap-4 items-center justify-between bg-slate-200 py-12 px-8 mt-8">
+          <div className="flex flex-col md:flex-row gap-2">
+            <div className="flex justify-start gap-2 md:text-lg items-start font-medium">
               <InfoIcon className="text-blue-400" />
               <p>Department can be changed after training programs</p>
             </div>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-slate-500">
               By pressing the submit button, the individual agrees to our{" "}
               <a href="#">Privacy Policy Guidelines</a>
             </p>
           </div>
-          <button className="py-2 px-4 rounded-full bg-blue-500 text-white w-24" type="submit">
+          <button className="w-full py-2 px-4 rounded-full bg-blue-500 text-white md:w-32" type="submit">
             Submit
           </button>
         </div>
