@@ -14,7 +14,7 @@ export default function NotificationCard({ user }) {
 
     return (
         <div
-            className={`flex items-center bg-white shadow-lg rounded-xl p-4 mb-2 w-full cursor-pointer ${
+            className={`flex items-center bg-white shadow-lg p-2 mb-2 w-full cursor-pointer ${
                 user.isRead ? "border-l-4 border-red-500" : "border-l-4 border-blue-500"
             }`}
             onClick={handleClick}

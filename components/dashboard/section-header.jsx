@@ -2,6 +2,7 @@
 import useModalStore from "@/store/modalStore";
 import Modal from '@/components/Data Models/modal'
 import AddOfficerModal from "../Data Models/addOfficer";
+import MyTable from "../tables/sample";
 
 export default function SectionHeader() {
 
@@ -79,6 +80,7 @@ export default function SectionHeader() {
             </div>
             <div>
                 <Modal/>
+                <MyTable/>
             </div>
         </div>
     )
