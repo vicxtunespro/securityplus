@@ -1,14 +1,16 @@
 "use client"
 import clsx from "clsx";
-import { Menu, Minimize, ShieldEllipsis, Users, Shield, FileText, Settings, LogOut, Home } from "lucide-react";
+import { Menu, Minimize, ShieldEllipsis, Users, Shield, FileText, Settings, LogOut, Home, Speaker, Bell } from "lucide-react";
 import useNavStore from "@/store/navStore";
 import { SearchBar } from "./search-bar";
 import NavItem from "./nav-item";
+import useAuthStore from "@/store/authStore";
 
 
 
 export default function SideBar(){
     const {min, minimize, maximize, toggleMenu} = useNavStore();
+    const { logout } = useAuthStore();
 
     return(
     <div className={
@@ -42,8 +44,9 @@ export default function SideBar(){
             <NavItem icon={FileText} label="Reports & Analysis" url={'/dashboard/analysis'}/>
         </div>
         <div className="mt-40 flexx flex-col gap-2">
+            <NavItem icon={Bell} label="Notification" url={'/dashboard/notifications'} min={min} maximize={maximize} />
             <NavItem icon={Settings} label="Settings" min={min} maximize={maximize} />
-            <NavItem icon={LogOut} label="Logout" min={min} maximize={maximize} />
+            <NavItem icon={LogOut} onClick={logout} label="Logout" min={min} maximize={maximize} />
         </div>
     </div>
     )
