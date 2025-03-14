@@ -15,7 +15,7 @@ export default function SideBar(){
     return(
     <div className={
         clsx(
-            "hidden md:relative h-screen bg-sky-800 text-white p-4 md:flex flex-col gap-8",
+            "hidden z-50 md:relative h-screen bg-sky-800 text-white p-4 md:flex flex-col gap-8",
             min ? " w-16 transition-all ease-in-out " : "min-w-[260px]"
         )
     }
