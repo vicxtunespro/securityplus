@@ -10,11 +10,12 @@ export default function SectionHeader({ children }) {
     const handleOpenModal = () => {
         openModal(<AddOfficerModal />);
     };
+    
 
     const navigation = [
         { href: "/dashboard/officers/overview", name: "Overview"},
         { href: "/dashboard/officers/mails", name: "Mails"},
-        { href: "#", name: "Billing" },
+        { href: "/dashboard/officers/shifts", name: "Shifts" },
     ];
 
     return (

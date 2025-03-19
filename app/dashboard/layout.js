@@ -2,7 +2,7 @@ import MobileNavBar from '@/components/dashboard/modileNav'
 import NavBar from '@/components/dashboard/navbar'
 import SideBar from '@/components/dashboard/navigation'
 import React from 'react'
-
+import ProtectedRoute from '@/components/HOC/protectedRoute'
 
 export default function DashboardLayout({ children }) {
   return (

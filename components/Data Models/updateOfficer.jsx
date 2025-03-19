@@ -1,13 +1,16 @@
 'use client';
-import React, { useState } from 'react';
-import { addOfficer } from '@/lib/database';
+import React, { useEffect, useState } from 'react';
+import { addOfficer, updateOfficer } from '@/lib/database';
 import InputField from './input-field';
 import { InfoIcon } from 'lucide-react';
 import useModalStore from '@/store/modalStore';
+import { getOfficer } from '@/lib/officerGateway';
 
 
 
-const AddOfficerModal = () => {
+const UpdateOfficerModal = ({id}) => {
+
+
   const {closeModal} = useModalStore()
 
   const [officerInfo, setOfficerInfo] = useState({
@@ -21,6 +24,20 @@ const AddOfficerModal = () => {
     password: '',
     confirmPassword: '', // Add confirmPassword field
   });
+
+
+  useEffect(() =>{
+    const fetchData = async () => {
+      try {
+        const officer = await getOfficer(id);
+        setOfficerInfo({...officer});
+      } catch (error) {
+       console.error(error.message) 
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     setOfficerInfo({ ...officerInfo, [e.target.name]: e.target.value });
@@ -36,8 +53,9 @@ const AddOfficerModal = () => {
     }
 
     try {
-      await addOfficer(officerInfo);
-      alert('Guard added successfully!');
+      await updateOfficer(id, officerInfo);
+      
+      alert('Officer infomation updated successfully!');
       closeModal()
       window.location.reload();
       setOfficerInfo({
@@ -144,12 +162,12 @@ const AddOfficerModal = () => {
             <span className="bg-blue-500 rounded-full size-5 lg:size-6 text-white flex items-center justify-center lg:text-xl font-bold">
               2
             </span>
-            <span className="font-bold text-2xl lg:text-3xl text-slate-300">PASSWORD</span>
+            <span className="font-bold text-2xl lg:text-3xl text-slate-300">UPDATE PASSWORD</span>
           </div>
           <div className="form-area grid grid-cols-12 md:gap-4 lg:gap-8">
             {/* Password */}
             <InputField
-              label={"Password"}
+              label={"New Password"}
               type={"password"}
               placeholder={"8 characters and more"}
               onChange={handleChange}
@@ -189,4 +207,4 @@ const AddOfficerModal = () => {
   );
 };
 
-export default AddOfficerModal;
+export default UpdateOfficerModal;

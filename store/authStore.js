@@ -5,14 +5,17 @@ import { create } from "zustand";
 
 const useAuthStore = create((set, get) => ({
     user: null,
-    email: "vicitug@gmail.com",
+    email: "",
     password: "",
+    role: "",
     error: "",
     loading: false,
 
     // Modification functions
     setEmail: (email) => set((state) => ({ ...state, email })),
     setPassword: (password) => set((state) => ({ ...state, password })),
+    setRole: (role) => set((state) => ({ ...state, role })),
+    setUser: (user) => set({ user }),
 
     // Login function
     login: async (router) => {

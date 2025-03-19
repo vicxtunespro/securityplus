@@ -23,7 +23,7 @@ export default function SectionHeader() {
         },
         {
             href: "javascript:void(0)",
-            name: "Billing"
+            name: "Shifts"
         },
         {
             href: "javascript:void(0)",
