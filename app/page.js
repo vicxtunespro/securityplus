@@ -1,16 +1,20 @@
-import CardGroup from '@/components/ud/cardGroup'
-import InfoCard from '@/components/ud/InfoCard'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { ChevronRight, MailIcon, Loader2, User } from "lucide-react"
+'use client'
+import useAuthStore from '@/store/authStore'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 
 
 export default function HomePage() {
+
+  const checkAuthState = useAuthStore((state) => state.checkAuthState);
+
+  useEffect(() => {
+    checkAuthState(); // Check auth state when app loads
+  }, []);
+
   return (
-    <div className='overflow-hidden'>
+    <div>
       <Link href={"/dashboard"}>Admins only</Link>
     </div>
   )

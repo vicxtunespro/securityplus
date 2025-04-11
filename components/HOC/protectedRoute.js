@@ -1,23 +1,47 @@
-"use client";
-import { useRouter } from "next/navigation";
-import useAuthStore from "@/store/authStore";
-import { useEffect } from "react";
+'use client'
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { auth, db } from "@/libs/firebase";
 
-export default function ProtectedRoute({ children, roleRequired }) {
-  const { user, role } = useAuthStore();
+const ProtectedRoute = ({ children, requiredRole }) => {
+  const [loading, setLoading] = useState(true);
+  const [userRole, setUserRole] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    // Log the role to see its structure
-    console.log("User  Role:", role); // This will log the entire role object
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        router.push("/login"); // Redirect to login if not logged in
+        return;
+      }
 
-    // Check if user is not authenticated or role does not match
-    if (!user || role?.role !== roleRequired) {
-        router.push("/auth/signin?message=unauthorized");
-    }
-    
-  }, [user, role, router, roleRequired]);
+      // Fetch user role from Firestore
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
 
-  // Render children only if user is authenticated and has the required role
-  return user && role?.role === roleRequired ? children : null;
-}
+      if (userSnap.exists()) {
+        const role = userSnap.data().role;
+        setUserRole(role);
+
+        // Redirect if the role doesn't match
+        if (requiredRole && role !== requiredRole) {
+          router.push("/unauthorized"); // Redirect unauthorized users
+        }
+      } else {
+        console.error("User role not found in database");
+      }
+
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [router, requiredRole]);
+
+  if (loading) return <p>Loading...</p>;
+
+  return <>{children}</>;
+};
+
+export default ProtectedRoute;

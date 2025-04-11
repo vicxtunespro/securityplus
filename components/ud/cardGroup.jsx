@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import InfoCard from '@/components/ud/InfoCard';
 import { User, Shield, AlertCircle, Activity } from 'lucide-react';
 import { Header } from '../dashboard/header';
-import { getOfficers } from '@/lib/officerGateway';
-import { getClients } from '@/lib/clientsGateway';
+import { getOfficers } from '@/libs/officerGateway';
+import { getClients } from '@/libs/clientsGateway';
 import Link from 'next/link';
 
 export default function CardGroup() {

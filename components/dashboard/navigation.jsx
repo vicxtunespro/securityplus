@@ -1,6 +1,6 @@
 "use client"
 import clsx from "clsx";
-import { Menu, Minimize, ShieldEllipsis, Users, Shield, FileText, Settings, LogOut, Home, Speaker, Bell } from "lucide-react";
+import { Menu, Minimize, ShieldEllipsis, Users, Shield, FileText, Settings, LogOut, Home, Speaker, Bell, BookDashed } from "lucide-react";
 import useNavStore from "@/store/navStore";
 import { SearchBar } from "./search-bar";
 import NavItem from "./nav-item";
@@ -15,7 +15,7 @@ export default function SideBar(){
     return(
     <div className={
         clsx(
-            "hidden z-50 md:relative h-screen bg-sky-800 text-white p-4 md:flex flex-col gap-8",
+            "hidden z-50 md:relative h-screen bg-main text-white p-4 md:flex flex-col gap-8",
             min ? " w-16 transition-all ease-in-out " : "min-w-[260px]"
         )
     }
@@ -36,11 +36,12 @@ export default function SideBar(){
                 min ? "hidden" : "block"
             )}><Minimize onClick={minimize}/></span>
         </div>
-        <SearchBar min={min}/>
+        
         <div className="flex flex-col gap-2">
             <NavItem icon={Home} label="Dashboard" url={'/dashboard'}/>
             <NavItem icon={Users} label="Client Management" url={'/dashboard/clients'}/>
             <NavItem icon={Shield} label="Officer Management" url={'/dashboard/officers'}/>
+            <NavItem icon={BookDashed} label="Services" url={'/dashboard/officers'}/>
             <NavItem icon={FileText} label="Reports & Analysis" url={'/dashboard/analysis'}/>
         </div>
         <div className="mt-40 flexx flex-col gap-2">

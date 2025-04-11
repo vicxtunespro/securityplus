@@ -44,7 +44,7 @@ export default function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="w-full p-2 bg-main text-white rounded hover:bg-blue-600"
           >
             {loading ? "Signing up..." : "Signup"}
           </button>

@@ -1,38 +1,46 @@
-'use client'
-import { auth } from "@/lib/firebase";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+"use client";
+import { auth, db } from "@/libs/firebase"; // Ensure db is imported
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import { create } from "zustand";
 
 const useAuthStore = create((set, get) => ({
     user: null,
-    email: "",
-    password: "",
-    role: "",
-    error: "",
+    role: null,
     loading: false,
+    error: "",
 
-    // Modification functions
-    setEmail: (email) => set((state) => ({ ...state, email })),
-    setPassword: (password) => set((state) => ({ ...state, password })),
-    setRole: (role) => set((state) => ({ ...state, role })),
+    // Set user state
     setUser: (user) => set({ user }),
 
-    // Login function
-    login: async (router) => {
-        set((state) => ({ ...state, loading: true, error: "" }));
-
+    // Fetch user details from Firestore
+    fetchUserDetails: async (uid) => {
         try {
-            // Retrieve the latest email & password from Zustand
-            const { email, password } = get();
-            const userCredentials = await signInWithEmailAndPassword(auth, email, password);
-            set((state) => ({ ...state, user: userCredentials.user }));
-
-            // Redirect after successful login
-            router.push("/dashboard");
+            const userDoc = await getDoc(doc(db, "users", uid));
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                set({ user: { uid, ...userData }, role: userData.role });
+                localStorage.setItem("authUser", JSON.stringify({ uid, ...userData }));
+            }
         } catch (err) {
-            set((state) => ({ ...state, error: err.message }));
+            console.error("Error fetching user details:", err);
+        }
+    },
+
+    // Login function
+    login: async (email, password, router) => {
+        set({ loading: true, error: "" });
+        try {
+            const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredentials.user;
+
+            await get().fetchUserDetails(user.uid); // Fetch user info from Firestore
+
+            router.push("/dashboard"); // Redirect to dashboard
+        } catch (err) {
+            set({ error: err.message });
         } finally {
-            set((state) => ({ ...state, loading: false }));
+            set({ loading: false });
         }
     },
 
@@ -40,14 +48,26 @@ const useAuthStore = create((set, get) => ({
     logout: async () => {
         try {
             await signOut(auth);
-            set((state) => ({ ...state, user: null }));
+            set({ user: null, role: null });
+            localStorage.removeItem("authUser");
         } catch (err) {
             console.error("Logout error:", err);
         }
     },
+
+    // Auto-load session on app start
+    checkAuthState: () => {
+        set({ loading: true });
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                get().fetchUserDetails(user.uid);
+            } else {
+                set({ user: null, role: null });
+                localStorage.removeItem("authUser");
+            }
+            set({ loading: false });
+        });
+    },
 }));
-
-
-
 
 export default useAuthStore;

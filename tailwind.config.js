@@ -9,7 +9,8 @@ module.exports = {
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
+			main: '#172554',
+  			background: '#f2f2f2',
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
@@ -50,6 +51,13 @@ module.exports = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+		screens: {
+			'xs': '480px',  // Extra small screens
+			'sm': '640px',  // Small (default Tailwind sm)
+			'md': '768px',  // Medium (default Tailwind md)
+			'lg': '1024px', // Large (default Tailwind lg)
+			'xl': '1600px', // Extra Large (default Tailwind xl)
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

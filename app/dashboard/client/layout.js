@@ -13,16 +13,16 @@ export default function SectionHeader({ children }) {
     
 
     const navigation = [
-        { href: "/dashboard/officers/overview", name: "Overview"},
-        { href: "/dashboard/officers/mails", name: "Mails"},
-        { href: "/dashboard/officers/shifts", name: "Shifts" },
-        { href: "/dashboard/officers/maps", name: "Maps" },
+        { href: "/dashboard/client", name: "Overview"},
+        { href: "/dashboard/client/mails", name: "Contracts"},
+        { href: "/dashboard/client/shifts", name: "Emmergency Panel" },
+        { href: "/dashboard/client/shifts", name: "Reactions" },
     ];
 
     return (
         <div className="max-w-screen-xl mx-auto px-4 pt-4 md:px-8">
             <div className="items-start justify-between flex">
-                <h3 className="text-gray-800 text-2xl font-bold">Officers</h3>
+                <h3 className="text-gray-800 text-2xl font-bold">Clients</h3>
                 <div className="items-center gap-x-3 mt-6 md:mt-0 justify-center hidden md:flex">
                     <button className="flex items-center justify-center gap-x-2 px-4 py-2 text-gray-700 font-medium rounded-lg border hover:bg-gray-50 active:bg-gray-100 md:text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-gray-500">

@@ -1,4 +1,4 @@
-import { getGuards } from "@/lib/database"
+import { getGuards } from "@/libs/database"
 import { useEffect, useState } from "react"
 
 export default function OfficerTable(){

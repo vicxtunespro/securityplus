@@ -11,7 +11,7 @@ import {
   TextField,
   CircularProgress, // Import CircularProgress for the loader
 } from '@mui/material';
-import { deleteOffice, getOfficers } from '@/lib/officerGateway';
+import { deleteOffice, getOfficers } from '@/libs/officerGateway';
 import { Delete, DeleteIcon, Pen, Recycle, RecycleIcon, View } from 'lucide-react';
 import Link from 'next/link';
 import useModalStore from '@/store/modalStore';

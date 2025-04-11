@@ -9,7 +9,7 @@ import {
     PointElement,
     LineElement
 } from 'chart.js';
-import { SecurityCompanyData } from "@/lib/data/clientsdata";
+import { SecurityCompanyData } from "@/libs/data/clientsdata";
 
 ChartJS.register({
     LinearScale,

@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation"
 import { useEthics } from "@/store/ethicStore";
-import { signInWithGoogle } from "@/lib/authProviders";
+import { signInWithGoogle } from "@/libs/authProviders";
 import useAuthStore from "@/store/authStore";
 
 export default function AuthProviderBtn(){

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { db } from '@/lib/firebase'
+import { db } from '@/libs/firebase'
 import { query, collection, orderBy, onSnapshot, doc, updateDoc } from 'firebase/firestore'
 
 export const useNotificationStore = create((set) => ({

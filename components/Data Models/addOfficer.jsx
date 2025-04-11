@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { addOfficer } from '@/lib/database';
+import { addOfficer } from '@/libs/database';
 import InputField from './input-field';
 import { InfoIcon } from 'lucide-react';
 import useModalStore from '@/store/modalStore';
@@ -71,7 +71,7 @@ const AddOfficerModal = () => {
       <div className="form-section py-4 overflow-auto h-[90%]">
         <div>
           <div className="profile-section-header flex gap-2 items-center mb-4">
-            <span className="bg-blue-500 rounded-full size-5 lg:size-6 text-white flex items-center justify-center lg:text-xl font-bold">
+            <span className="bg-main rounded-full size-5 lg:size-6 text-white flex items-center justify-center lg:text-xl font-bold">
               1
             </span>
             <span className="font-bold text-2xl lg:text-3xl text-slate-300">PROFILE</span>
@@ -141,7 +141,7 @@ const AddOfficerModal = () => {
 
         <div>
           <div className="profile-section-header flex gap-2 items-center mt-6 mb-4">
-            <span className="bg-blue-500 rounded-full size-5 lg:size-6 text-white flex items-center justify-center lg:text-xl font-bold">
+            <span className="bg-main rounded-full size-5 lg:size-6 text-white flex items-center justify-center lg:text-xl font-bold">
               2
             </span>
             <span className="font-bold text-2xl lg:text-3xl text-slate-300">PASSWORD</span>
@@ -180,7 +180,7 @@ const AddOfficerModal = () => {
               <a href="#">Privacy Policy Guidelines</a>
             </p>
           </div>
-          <button className="w-full py-2 px-4 rounded-full bg-blue-500 text-white md:w-32" type="submit">
+          <button className="w-full py-2 px-4 rounded-full bg-main text-white md:w-32" type="submit">
             Submit
           </button>
         </div>
