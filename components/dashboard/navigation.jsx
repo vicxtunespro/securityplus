@@ -39,7 +39,7 @@ export default function SideBar(){
         
         <div className="flex flex-col gap-2">
             <NavItem icon={Home} label="Dashboard" url={'/dashboard'}/>
-            <NavItem icon={Users} label="Client Management" url={'/dashboard/clients'}/>
+            <NavItem icon={Users} label="Client Management" url={'/dashboard/client'}/>
             <NavItem icon={Shield} label="Officer Management" url={'/dashboard/officers'}/>
             <NavItem icon={BookDashed} label="Services" url={'/dashboard/officers'}/>
             <NavItem icon={FileText} label="Reports & Analysis" url={'/dashboard/analysis'}/>
