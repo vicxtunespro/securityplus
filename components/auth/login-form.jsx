@@ -2,7 +2,7 @@ import React from 'react'
 
 export function LoginForm() {
   return (
-    <div className='hidden h-full w-full md:w-[500px] bg-white border-t-2 border-blue-500 shadow'>
+    <div className='h-full w-full md:w-[500px] bg-white border-t-2 border-blue-500 shadow'>
       {/* Form Heading */}
       <div className='p-4'>
         <p className='text-md text-main font-semibold'>Log into your SP Account</p>
@@ -30,7 +30,7 @@ export function LoginForm() {
 
 export function OTPForm() {
   return (
-    <div className='h-full w-full md:w-[500px] bg-white border-t-2 border-blue-500 shadow'>
+    <div className='hidden h-full w-full md:w-[500px] bg-white border-t-2 border-blue-500 shadow'>
       {/* Form Heading */}
       <div className='p-4'>
         <p className='text-md text-main font-semibold'>OTP sent to your phone</p>
@@ -44,7 +44,7 @@ export function OTPForm() {
         <form className='flex flex-col gap-4 '>
           <label htmlFor="number">Enter 6 digit code<span className='text-red-500'>*</span></label>
           <div className='w-full flex justify-between gap-2 text-xl'>
-            <input type='text' placeholder="Enter code here" maxLenght={6} required className="size-14 px-2 py-2 text-center w-full focus:outline-green-400 border border-slate-300 rounded"></input>
+            <input type='text' placeholder="Enter code here" maxlenght={6} required className="size-14 px-2 py-2 text-center w-full focus:outline-green-400 border border-slate-300 rounded"></input>
           </div>
 
           <button className='py-3 px-4 bg-main text-background rounded'>Verify code</button>

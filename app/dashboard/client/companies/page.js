@@ -1,11 +1,10 @@
-import ClientsTable from '@/components/tables/clientsTable'
 import CompanyTable from '@/components/tables/companyTable'
 import React from 'react'
 
-export default function ClientsPage() {
+export default function CompanyPage() {
   return (
     <div>
-      <ClientsTable/>
+        <CompanyTable/>
     </div>
   )
 }

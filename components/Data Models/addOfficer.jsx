@@ -4,11 +4,32 @@ import { addOfficer } from '@/libs/database';
 import InputField from './input-field';
 import { InfoIcon } from 'lucide-react';
 import useModalStore from '@/store/modalStore';
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker
+} from '@react-google-maps/api';
 
 
 
 const AddOfficerModal = () => {
   const {closeModal} = useModalStore()
+
+  // Add this in your component
+    const [locationMethod, setLocationMethod] = useState('map'); // 'map' or 'manual'
+    const [location, setLocation] = useState({ lat: null, lng: null });
+    
+    // Load Google Maps
+    const { isLoaded } = useJsApiLoader({
+      googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, // Replace with your real API key
+    });
+    
+    const handleMapClick = (e) => {
+      const lat = e.latLng.lat();
+      const lng = e.latLng.lng();
+      setLocation({ lat, lng });
+      setOfficerInfo({ ...officerInfo, residence: `Lat: ${lat}, Lng: ${lng}` });
+    };
 
   const [officerInfo, setOfficerInfo] = useState({
     first_name: '',
@@ -135,38 +156,82 @@ const AddOfficerModal = () => {
               onChange={handleChange}
               value={officerInfo.residence}
               name="residence"
+              disabled
             />
           </div>
         </div>
 
         <div>
           <div className="profile-section-header flex gap-2 items-center mt-6 mb-4">
-            <span className="bg-main rounded-full size-5 lg:size-6 text-white flex items-center justify-center lg:text-xl font-bold">
-              2
-            </span>
-            <span className="font-bold text-2xl lg:text-3xl text-slate-300">PASSWORD</span>
+            <span className="font-bold text-2xl lg:text-3xl text-slate-300">LOCATION</span>
           </div>
-          <div className="form-area grid grid-cols-12 md:gap-4 lg:gap-8">
-            {/* Password */}
-            <InputField
-              label={"Password"}
-              type={"password"}
-              placeholder={"8 characters and more"}
-              onChange={handleChange}
-              value={officerInfo.password}
-              name="password"
-            />
 
-            {/* Confirm Password */}
-            <InputField
-              label={"Confirm Password"}
-              type={"password"}
-              placeholder={"Repeat Password"}
-              onChange={handleChange}
-              value={officerInfo.confirmPassword}
-              name="confirmPassword"
-            />
-          </div>
+          <div>
+              <div className="flex gap-6 mb-4">
+                <label>
+                  <input
+                    type="radio"
+                    value="map"
+                    checked={locationMethod === 'map'}
+                    onChange={() => setLocationMethod('map')}
+                  />{' '}
+                  Pick from Map
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="manual"
+                    checked={locationMethod === 'manual'}
+                    onChange={() => setLocationMethod('manual')}
+                  />{' '}
+                  Enter Manually
+                </label>
+              </div>
+              {/* Map or Manual Input */}
+              {locationMethod === 'map' ? (
+                <div className="w-full h-64 mb-4">
+                  {isLoaded ? (
+                    <GoogleMap
+                      mapContainerStyle={{ width: '100%', height: '100%' }}
+                      center={{ lat: 0.3476, lng: 32.5825 }} // Kampala as default center
+                      zoom={8}
+                      onClick={handleMapClick}
+                    >
+                      {location.lat && <Marker position={{ lat: location.lat, lng: location.lng }} />}
+                    </GoogleMap>
+                  ) : (
+                    <p>Loading map...</p>
+                  )}
+                  {location.lat && (
+                    <p className="text-sm mt-2">Selected: {location.lat.toFixed(4)}, {location.lng.toFixed(4)}</p>
+                  )}
+                </div>
+              ) : (
+                <div className="grid grid-cols-12 md:gap-4 lg:gap-8">
+                  <InputField
+                    label="Latitude"
+                    type="text"
+                    name="latitude"
+                    placeholder="Latitude"
+                    onChange={(e) =>
+                      setLocation({ ...location, lat: e.target.value })
+                    }
+                    value={location.lat || ''}
+                  />
+                  <InputField
+                    label="Longitude"
+                    type="text"
+                    name="longitude"
+                    placeholder="Longitude"
+                    onChange={(e) =>
+                      setLocation({ ...location, lng: e.target.value })
+                    }
+                    value={location.lng || ''}
+                  />
+                </div>
+              )}
+            </div>
+
         </div>
 
         <div className="w-full flex flex-col gap-4 items-center justify-between bg-slate-200 py-12 px-8 mt-8">

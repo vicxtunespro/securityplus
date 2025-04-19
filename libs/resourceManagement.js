@@ -1,5 +1,14 @@
-import { db } from '@/libs/firebase'
-import { getDoc, doc, setDoc, updateDoc, collection, addDoc, getDocs, deleteDoc } from 'firebase/firestore';
+import { db } from '@/libs/firebase';
+import {
+    getDoc,
+    doc,
+    setDoc,
+    updateDoc,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc
+} from 'firebase/firestore';
 
 class ResourceManager {
     constructor(collectionName) {
@@ -7,73 +16,77 @@ class ResourceManager {
         this.collectionName = collectionName;
     }
 
+    // Private helper methods
+    _collectionRef() {
+        return collection(this.db, this.collectionName);
+    }
+
+    _docRef(id) {
+        return doc(this.db, this.collectionName, id);
+    }
+
+    // Get all documents
     async getAll() {
         try {
-            const docRef = collection(this.db, this.collectionName);
-            const dataSnapshot = await getDocs(docRef);
-            const data = dataSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-            console.log(data);
-            return data;  
+            const snapshot = await getDocs(this._collectionRef());
+            return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         } catch (error) {
-            console.error("Error getting documents: ", error);
-            throw error; // Optionally rethrow the error for further handling
+            console.error(`❌ Failed to fetch documents from '${this.collectionName}':`, error);
+            throw error;
         }
     }
 
+    // Get a single document by ID
     async get(id) {
         try {
-            const docRef = doc(this.db, this.collectionName, id);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                return { id: docSnap.id, ...docSnap.data() }; // Return the document data along with its ID
-            } else {
-                throw new Error("No such document!");
-            }
+            const docSnap = await getDoc(this._docRef(id));
+            if (!docSnap.exists()) throw new Error("Document not found");
+            return { id: docSnap.id, ...docSnap.data() };
         } catch (error) {
-            console.error("Error getting document: ", error);
-            throw error; // Rethrow the error for handling in the component
+            console.error(`❌ Failed to fetch document '${id}' from '${this.collectionName}':`, error);
+            throw error;
         }
     }
 
+    // Add a new document
     async addResource(resource) {
         try {
-            const docRef = await addDoc(collection(this.db, this.collectionName), resource);
-            console.log("Document written with ID: ", docRef.id);
-            return docRef.id; // Return the ID of the newly created document
+            const docRef = await addDoc(this._collectionRef(), {
+                ...resource,
+                createdAt: new Date()
+            });
+            console.log(`✅ Document added to '${this.collectionName}' with ID: ${docRef.id}`);
+            return docRef.id;
         } catch (error) {
-            console.error("Error adding document: ", error);
+            console.error(`❌ Failed to add document to '${this.collectionName}':`, error);
             throw error;
         }
     }
 
+    // Update an existing document
     async updateResource(id, updatedData) {
         try {
-            const docRef = doc(this.db, this.collectionName, id);
-            await updateDoc(docRef, updatedData);
-            console.log("Document updated with ID: ", id);
+            await updateDoc(this._docRef(id), updatedData);
+            console.log(`✅ Document '${id}' updated in '${this.collectionName}'`);
         } catch (error) {
-            console.error("Error updating document: ", error);
+            console.error(`❌ Failed to update document '${id}' in '${this.collectionName}':`, error);
             throw error;
         }
     }
 
+    // Delete a document
     async deleteResource(id) {
         try {
-            const docRef = doc(this.db, this.collectionName, id);
-            await deleteDoc(docRef);
-            console.log("Document deleted with ID: ", id);
+            await deleteDoc(this._docRef(id));
+            console.log(`🗑️ Document '${id}' deleted from '${this.collectionName}'`);
         } catch (error) {
-            console.error("Error deleting document: ", error);
+            console.error(`❌ Failed to delete document '${id}' from '${this.collectionName}':`, error);
             throw error;
         }
     }
 }
 
-//User managerment
-export const clientManager = new ResourceManager('users');
-
-//Officer manager
-export const officerManager = new ResourceManager('guards');
-
-//Shift manager
+// 🔧 Instantiate managers for each collection
 export const shiftManager = new ResourceManager('shifts');
+export const clientManager = new ResourceManager('clients');
+export const officerManager = new ResourceManager('guards');
