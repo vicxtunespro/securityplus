@@ -4,7 +4,10 @@ import React from 'react'
 export default function Nav() {
   return (
     <div className='w-full flex justify-between items-center'>
-        <ShieldEllipsis className='text-white size-8'/>
+        <div className='flex gap-4 items-center'>
+          <ShieldEllipsis className='text-white size-8'/>
+          <p className='text-white t'>EasyDeploy</p>
+        </div>
         <ul className='flex gap-8 text-xs text-background'>
             <li><a href='/dashboard'>Home</a></li>
             <li><a href='#'>Become a Member</a></li>

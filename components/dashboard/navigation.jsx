@@ -4,13 +4,12 @@ import { Menu, Minimize, ShieldEllipsis, Users, Shield, FileText, Settings, LogO
 import useNavStore from "@/store/navStore";
 import { SearchBar } from "./search-bar";
 import NavItem from "./nav-item";
-import useAuthStore from "@/store/authStore";
-
-
+import useAuthStore from "@/store/useAuthStore";
+import { Logout } from "@/utils/authService";
+import { Tooltip } from "react-tooltip";
 
 export default function SideBar(){
     const {min, minimize, maximize, toggleMenu} = useNavStore();
-    const { logout } = useAuthStore();
 
     return(
     <div className={
@@ -38,16 +37,16 @@ export default function SideBar(){
         </div>
         
         <div className="flex flex-col gap-2">
-            <NavItem icon={Home} label="Dashboard" url={'/dashboard'}/>
+            <NavItem data-tooltip-id="my-tooltip" data-tooltip-content="Dashboard"  icon={Home} label="Dashboard" url={'/dashboard'}/>
             <NavItem icon={Users} label="Client Management" url={'/dashboard/client'}/>
             <NavItem icon={Shield} label="Officer Management" url={'/dashboard/officers'}/>
             <NavItem icon={BookDashed} label="Services" url={'/dashboard/officers'}/>
-            <NavItem icon={FileText} label="Reports & Analysis" url={'/dashboard/analysis'}/>
+            <NavItem icon={BookDashed} label="Weapon Management" url={'/dashboard/weapons'}/>
+            <Tooltip id="my-tooltip"/>
         </div>
         <div className="mt-40 flexx flex-col gap-2">
             <NavItem icon={Bell} label="Notification" url={'/dashboard/notifications'} min={min} maximize={maximize} />
-            <NavItem icon={Settings} label="Settings" min={min} maximize={maximize} />
-            <NavItem icon={LogOut} onClick={logout} label="Logout" min={min} maximize={maximize} />
+            <NavItem icon={LogOut} onClick={Logout} label="Logout" min={min} maximize={maximize} />
         </div>
     </div>
     )

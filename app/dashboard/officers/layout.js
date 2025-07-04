@@ -14,8 +14,7 @@ export default function SectionHeader({ children }) {
 
     const navigation = [
         { href: "/dashboard/officers/overview", name: "Overview"},
-        { href: "/dashboard/officers/mails", name: "Mails"},
-        { href: "/dashboard/officers/shifts", name: "Shifts" },
+        { href: "/dashboard/officers/shifts", name: "Deployment" },
         { href: "/dashboard/officers/maps", name: "Maps" },
     ];
 

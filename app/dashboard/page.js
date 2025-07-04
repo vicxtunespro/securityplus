@@ -7,25 +7,17 @@ import { ChartGroup } from '@/components/dashboard/chartGroup'
 import CardGroup from '@/components/ud/cardGroup'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useAuthStore } from '@/store/useAuthStore';
+import { useRouter } from 'next/navigation'
+
 
 
 function Dashboard() {
 
+  const {user} = useAuthStore();
+  console.log(user)
+
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  useEffect(()=> {
-    const message = searchParams.get('message');
-    if(message === "unauthorised"){
-      toast.error("Admins are not allowed to visit clients pages.", {
-        autoClose: 10000,
-        closeOnClick: true,
-        pauseOnHover: true,
-      });
-    }
-  }, [searchParams]);
-
   return (
     <div className="flex flex-col gap-8 ">
         <ToastContainer />

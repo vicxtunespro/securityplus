@@ -5,7 +5,6 @@ export default function ShiftManage() {
   return (
     <div>
       <ShiftManager/>
-      <ShiftManager/>
     </div>
   )
 }

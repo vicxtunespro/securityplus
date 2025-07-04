@@ -18,9 +18,10 @@ import { Eye, Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
 import useModalStore from "@/store/modalStore";
 import UpdateOfficerModal from "../Data Models/updateOfficer";
+import TableExport from "./exportTable";
 
 const CompanyTable = () => {
-  const [officers, setOfficers] = useState([]);
+  const [companyData, setCompanyData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(0);
@@ -35,9 +36,9 @@ const CompanyTable = () => {
         const companyData = data.filter(
           (company) => company.clientType === "company"
         );
-        setOfficers(companyData);
+        setCompanyData(companyData);
       } catch (error) {
-        console.error("Error fetching officers:", error);
+        console.error("Error fetching companyData:", error);
       }
       setLoading(false);
     }
@@ -55,7 +56,7 @@ const CompanyTable = () => {
     if (confirmDelete) {
       try {
         await clientManager.delete(id); // <-- Make sure this method exists in clientManager
-        setOfficers((prev) => prev.filter((o) => o.id !== id));
+        setCompanyData((prev) => prev.filter((o) => o.id !== id));
       } catch (error) {
         console.log("Delete error:", error.message);
       }
@@ -76,7 +77,7 @@ const CompanyTable = () => {
     setPage(0);
   };
 
-  const filteredData = officers.filter((row) =>
+  const filteredData = companyData.filter((row) =>
     `${row.company_name}`.toLowerCase().includes(filter.toLowerCase()) ||
     row.email.toLowerCase().includes(filter.toLowerCase()) ||
     row.phone.includes(filter)
@@ -87,17 +88,36 @@ const CompanyTable = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+
+  const exportColumns = [
+    { header: "Company ID", accessor: "security_code" },
+    { header: "Full Name", accessor: "company_name" },
+    { header: "Email", accessor: "email" },
+    { header: "Contact Phone", accessor: "phone" },
+    { header: "Site Location", accessor: "client_address" },
+  ];
+
   return (
     <div>
-      <TextField
-        label="Quick Search"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={filter}
-        onChange={handleFilterChange}
-        className="lg:w-72"
-      />
+      <div className="flex flex-col md:flex-row md:justify-between items-center">
+        <TextField
+          label="Quick Search"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          value={filter}
+          onChange={handleFilterChange}
+          className="lg:w-72"
+          placeholder="Search by name, email, phone..."
+        />
+
+        <TableExport
+        columns={exportColumns}
+          data={companyData}
+          title="Companies under security services"
+          buttonText="Export"
+        />
+      </div>
 
       {loading ? (
         <div className="flex justify-center items-center mt-4">
@@ -129,7 +149,7 @@ const CompanyTable = () => {
                     Phone
                   </TableCell>
                   <TableCell className="font-bold text-gray-700 hidden md:table-cell">
-                    Residence
+                    Site Location
                   </TableCell>
                   <TableCell className="font-bold text-gray-700 hidden md:table-cell">
                     Actions
@@ -141,7 +161,7 @@ const CompanyTable = () => {
                   <TableRow key={row.id} className="hover:bg-gray-100">
                     <TableCell className="hidden md:table-cell">
                     <Link
-                        href={`/dashboard/officers/overview/officer/${row.id}`}
+                        href={`/dashboard/companyData/overview/officer/${row.id}`}
                         className="text-blue-600 hover:underline hover:cursor-pointer"
                       >
                       {row.security_code}

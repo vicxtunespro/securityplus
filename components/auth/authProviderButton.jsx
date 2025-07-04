@@ -1,19 +1,20 @@
+'use client'
 import { useRouter } from "next/navigation"
 import { useEthics } from "@/store/ethicStore";
-import { signInWithGoogle } from "@/libs/authProviders";
-import useAuthStore from "@/store/authStore";
+import { signInWithGoogle } from "@/utils/authService";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function AuthProviderBtn(){
 
     const { loading, startLoading, stopLoading } = useEthics();
-    const {setUser, setRole}  = useAuthStore(); // Get the setUser  function from the store
+    const {setUser}  = useAuthStore(); // Get the setUser  function from the store
 
 
     const router = useRouter();
 
     return (
         <button 
-                onClick={() => signInWithGoogle(router, startLoading, stopLoading, setUser, setRole)}
+                onClick={() => signInWithGoogle(router, startLoading, stopLoading, setUser)}
                 className="w-full flex items-center justify-center gap-x-3 py-2.5 mt-5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100">
                     <svg className="w-5 h-5" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_17_40)">

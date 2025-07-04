@@ -1,4 +1,5 @@
 import React from 'react'
+import AuthProviderBtn from './authProviderButton'
 
 export function LoginForm() {
   return (
@@ -18,7 +19,7 @@ export function LoginForm() {
           <input type='text' placeholder='Enter mobile number here' className="px-4 py-4 text-center focus:outline-none border border-slate-300 rounded"></input>
 
           <button className='py-2 px-4 bg-main text-background rounded'>Login</button>
-          <button className='py-2 px-4 outline-1 outline-dashed  text-main rounded'>Continue with Goggle</button>
+          <AuthProviderBtn />
         </form>
 
         <p className="text-center text-xs text-slate-500">Don't have an account? <a href='#' className='text-blue-500 text-underline'>Become a member</a></p>

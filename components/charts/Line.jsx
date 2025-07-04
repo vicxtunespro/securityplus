@@ -36,7 +36,7 @@ export function LineGraph(){
     }
     return(
         <div className="col-span-12 md:col-span-12 lg:col-span-8 bg-white rounded-lg p-8">
-            <CardHeader title={"Emergencies"}/>
+            <CardHeader title={"Mounthly Deployment"}/>
             <Line options={Options} data={SecurityCompanyData}/>
         </div>
     )

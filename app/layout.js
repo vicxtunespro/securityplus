@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
 
 const geistSans = localFont({
@@ -30,6 +32,17 @@ export default function RootLayout({ children }) {
         className={`${poppins.className} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </body>
     </html>
   );

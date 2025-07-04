@@ -89,4 +89,6 @@ class ResourceManager {
 // 🔧 Instantiate managers for each collection
 export const shiftManager = new ResourceManager('shifts');
 export const clientManager = new ResourceManager('clients');
-export const officerManager = new ResourceManager('guards');
+export const officerManager = new ResourceManager('officers');
+export const weaponManager = new ResourceManager('weapons');
+export const userManager = new ResourceManager('users')
